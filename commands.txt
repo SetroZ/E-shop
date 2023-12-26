@@ -1,0 +1,3 @@
+py manage.py runserver
+
+source env/scripts/activate

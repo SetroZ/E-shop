@@ -1,5 +1,0 @@
-py manage.py runserver
-pipreqs location
-source env/scripts/activate
-python -m venv env
-pip install -r requirements.txt

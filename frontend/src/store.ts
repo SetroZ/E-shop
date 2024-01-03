@@ -1,12 +1,14 @@
-import {configureStore , combineReducers , applyMiddleware} from '@reduxjs/toolkit'
-import { thunk } from 'redux-thunk'
+import {
+  configureStore,
+  combineReducers,
 
-const reducer = combineReducers({})
+} from '@reduxjs/toolkit'
+import { productsReducer } from './slices/productsSlices'
+const reducer = combineReducers({ products: productsReducer })
 
-
-
-const store = configureStore({reducer,
-middleware:[thunk]
-})
+const store = configureStore({ reducer })
 
 export default store
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>

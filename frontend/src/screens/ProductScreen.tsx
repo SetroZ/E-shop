@@ -1,29 +1,24 @@
-import {
-  Button,
-  Col,
-
-  Row,
-  Image,
-  ListGroup,
-  Card,
-} from 'react-bootstrap'
+import { Button, Col, Row, Image, ListGroup, Card } from 'react-bootstrap'
 import { productType } from '../products'
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
 export default function ProductScreen() {
+  const { products } = useSelector((state: RootState) => state.products)
   const [product, setProduct] = useState<productType | Record<string, never>>(
     {}
   )
   const { productId } = useParams()
   useEffect(() => {
     async function fetchProduct() {
-      const { data }: { data: productType[] } = await axios.get('/api/products')
-      const currentProduct = data.find((product) => product._id == productId)
+      const currentProduct = products.find(
+        (product) => product._id == productId
+      )
       setProduct(currentProduct as productType)
     }
     fetchProduct()
-  }, [])
+  }, [productId, products])
 
   return (
     <div className=''>
